@@ -1,0 +1,27 @@
+CREATE TABLE The_Sports_Store (id INTEGER PRIMARY KEY, item TEXT, price INTEGER, quantity INTEGER, aisle INTEGER, size TEXT);
+
+INSERT INTO The_Sports_Store VALUES (1, "Baseball Bats", 35, 27, 3, "Adult");
+INSERT INTO The_Sports_Store VALUES (2, "Baseball Gloves", 30, 23, 3, "Kids");
+INSERT INTO The_Sports_Store VALUES (3, "Soccer Balls", 20, 32, 2, "Kids");
+INSERT INTO The_Sports_Store VALUES (4, "Shin Pads", 15, 14, 2, "Kids");
+INSERT INTO The_Sports_Store VALUES (5, "Boxing Gloves", 25, 15, 1, "Adult");
+INSERT INTO The_Sports_Store VALUES (6, "Lacrosse Sticks", 50, 21, 4, "Kids");
+INSERT INTO The_Sports_Store VALUES (7, "Tennis Rackets", 40, 17, 1, "Adult");
+INSERT INTO The_Sports_Store VALUES (8, "Tennis Balls", 8, 62, 1, "Adult");
+INSERT INTO The_Sports_Store VALUES (9, "Skateboards", 65, 11, 4, "Kids");
+INSERT INTO The_Sports_Store VALUES (10, "Volleyballs", 25, 19, 1, "Adult");
+INSERT INTO The_Sports_Store VALUES (11, "Swimming Goggles", 15, 13, 4, "Kids");
+INSERT INTO The_Sports_Store VALUES (12, "Swimsuits", 25, 9, 4, "Adult");
+INSERT INTO The_Sports_Store VALUES (13, "Lacrosse Balls", 2, 60, 4, "Kids");
+INSERT INTO The_Sports_Store VALUES (14, "Baseballs", 1, 100, 3, "Kids");
+INSERT INTO The_Sports_Store VALUES (15, "Wrestling Singlet", 30, 15, 1, "Adult");
+
+-- Display the database ordered by price.
+SELECT * FROM The_Sports_Store ORDER BY price;
+
+--How many items are in each aisle?
+SELECT aisle, SUM(quantity) FROM The_Sports_Store GROUP BY aisle;
+
+--What items cost more than $30?
+SELECT * FROM The_Sports_Store WHERE price > 30
+ORDER BY price;
