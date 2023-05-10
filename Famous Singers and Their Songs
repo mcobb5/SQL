@@ -1,0 +1,65 @@
+CREATE TABLE artists (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    stage_name TEXT,
+    real_name TEXT
+); 
+
+INSERT INTO artists (stage_name, real_name) VALUES ("Lil Nas X", "Montero Lamar Hill");
+INSERT INTO artists (stage_name, real_name) VALUES ("Janelle Monáe", "Janelle Monáe Robinson");
+INSERT INTO artists (stage_name, real_name) VALUES ("Ben Platt", "Benjamin Schiff Platt");
+INSERT INTO artists (stage_name, real_name) VALUES ("Robyn", "Robin Miriam Carlsson");
+INSERT INTO artists (stage_name, real_name) VALUES ("Pink", "Alecia Beth Moore");
+
+CREATE TABLE songs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    artist_id INTEGER,
+    title TEXT,
+    release_year INTEGER,
+    views NUMERIC
+); 
+
+
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (1, "Old Town Road", 2018, 851);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (1, "Panini", 2019, 423);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (1, "Montero (Call Me By Your Name)", 2021, 391);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (1, "Sun Goes Down", 2021, 35);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (1, "Industry Baby", 2021, 206);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (1, "That's What I Want", 2021, 68);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (2, "Turntables", 2021, 2);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (2, "Make Me Feel", 2018, 31);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (2, "Tightrope", 2010, 28);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (2, "Dirty Computer", 2018, 3);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (3, "Grow as We Go", 2019, 23);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (3, "Rain", 2019, 4);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (3, "Older", 2019, 6);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (3, "Imagine", 2021, 2);
+INSERT INTO songs (artist_id, title, release_year, views) 
+   VALUES (3, "I Wanna Love You But I Don't", 2021, 1);
+
+--General table of artists and their real name.
+SELECT * FROM artists;
+
+--What artists released which songs, and in what year?
+SELECT stage_name, title, release_year
+   FROM artists, songs
+   WHERE artists.id = songs.artist_id;
+
+--Table of songs released by artists, listed using their real name.
+SELECT a.real_name, s.title
+    FROM artists a
+        JOIN songs s
+            ON a.id = s.artist_id;
