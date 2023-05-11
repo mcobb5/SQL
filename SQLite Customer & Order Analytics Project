@@ -1,0 +1,50 @@
+1)
+
+SELECT COUNT(ORDERID)
+    FROM BIT_DB.jansales
+
+WHERE length(orderid) = 6
+AND orderid <> 'Order ID';
+
+2)
+
+SELECT COUNT(product)
+    FROM BIT_DB.jansales
+            WHERE product = "iPhone";
+
+3)
+
+SELECT customers.acctnum
+    FROM BIT_DB.customers
+        LEFT JOIN BIT_DB.FebSales
+            ON customers.order_id = FebSales.orderID;
+            
+4)
+
+SELECT Product, price
+    FROM BIT_DB.JanSales
+        ORDER BY price asc
+                LIMIT 1;
+                
+5)
+
+SELECT product, SUM(quantity)*price as revenue
+    FROM BIT_DB.JanSales
+        GROUP BY product;
+        
+6)
+
+SELECT product, sum(quantity), SUM(quantity)*price as revenue
+    FROM BIT_DB.FebSales
+        WHERE location = '548 Lincoln St, Seattle, WA 98101'
+            GROUP BY product;
+
+7)
+
+SELECT COUNT(distinct customers.acctnum), AVG(quantity*price) as "Average Amount Spent"
+    FROM BIT_DB.FebSales
+        LEFT JOIN BIT_DB.customers
+            ON customers.order_id = FebSales.orderID
+                WHERE FebSales.quantity > 2
+                    AND length(orderid) = 6
+                    AND orderid <> 'Order ID';
