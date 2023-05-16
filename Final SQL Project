@@ -1,0 +1,49 @@
+#1. Find all invoices of customers from Brazil, and include pertinent information.
+SELECT cust.FirstName, cust.LastName, inv.InvoiceId, inv.BillingCountry, inv.InvoiceDate
+    FROM chinook.invoices as inv
+        LEFT JOIN chinook.customers as cust
+            ON inv.CustomerId = cust.CustomerId
+                WHERE inv.BillingCountry = "Brazil";
+                
+
+#2. Utilize a query that shows all invoices associated with each Sales Agent.                
+SELECT emp.LastName, emp.FirstName, inv.InvoiceId
+    FROM chinook.employees as emp
+        JOIN chinook.customers as cust ON cust.SupportRepId = emp.EmployeeId
+        JOIN chinook.invoices as inv ON inv.CustomerId = cust.CustomerId;
+        
+
+#3. What are the total sales for 2009?        
+SELECT SUM(Total)
+    FROM chinook.invoices
+        WHERE invoicedate BETWEEN '2009-01-01' AND '2009-12-31';
+        
+
+#4. Show the total sales made by each Sales Agent.        
+SELECT emp.FirstName, emp.LastName, ROUND(SUM(Inv.Total), 2) as 'Total Sales'
+    FROM chinook.employees emp
+    
+    JOIN chinook.customers cust
+        ON cust.SupportRepId = emp.EmployeeId
+        
+    JOIN chinook.invoices inv
+        ON inv.CustomerId = cust.CustomerId
+        
+    WHERE emp.title = 'Sales Support Agent'
+        GROUP BY emp.FirstName;
+        
+
+#5. Which Sales Agent had the highest sales volume in 2009?        
+SELECT emp.FirstName, emp.LastName, ROUND(SUM(Inv.total),2) as 'Total Sales'
+    FROM chinook.employees emp
+    
+    JOIN chinook.customers cust
+        ON cust.SupportRepId = emp.EmployeeId
+        
+    JOIN chinook.invoices inv
+        ON inv.customerId = cust.customerId
+        
+    WHERE emp.title = 'Sales Support Agent'
+        AND inv.invoicedate LIKE '%2009%'
+            GROUP BY emp.FirstName
+            ORDER BY (round(sum(inv.total),2)) desc limit 1;
